@@ -1,6 +1,7 @@
 package textures;
 
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 import java.io.File;
 import java.io.IOException;
 
@@ -16,5 +17,9 @@ public class ImageReader {
 			System.err.println("Couldn't read from File at " + path);
 			return null;
 		}
+	}
+	
+	public static int[] getPixelsOfImage(BufferedImage img) {
+		return ((DataBufferInt) img.getRaster().getDataBuffer()).getData();
 	}
 }
