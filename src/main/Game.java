@@ -5,13 +5,17 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.util.Iterator;
+
+import screen.ScreenManager;
+import screenStates.GameScreen;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 	
-	private static final int WIDTH = 320;
-	private static final int HEIGHT = 240;
+	private static final int WIDTH = 160;
+	private static final int HEIGHT = 120;
+	
+	public static Game instance;
 	
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
@@ -19,8 +23,15 @@ public class Game extends Canvas implements Runnable {
 	
 	int tickCount;
 	
+	public Game() {
+		instance = this;
+	}
+	
 	public void start() {
 		running = true;
+		GameScreen gameScreen = new GameScreen();
+		ScreenManager.setScreen(gameScreen);
+		
 		new Thread(this).start();
 	}
 	
@@ -40,15 +51,12 @@ public class Game extends Canvas implements Runnable {
 			return;
 		}
 		
-		for(int i = 0; i < pixels.length; i++) {
-			pixels[i] = i + tickCount | 0xFF000000;
-		}
-		
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 		g.dispose();
 		bs.show();
 	}
+	
 
 	@Override
 	public void run() {
@@ -63,7 +71,7 @@ public class Game extends Canvas implements Runnable {
 			delta += (now - lastTime) / ns;
 			lastTime = now;
 			while(delta >= 1) {
-				tick();
+				ScreenManager.tick(pixels);
 				delta--;
 			}
 			frames++;

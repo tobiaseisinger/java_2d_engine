@@ -20,6 +20,7 @@ public class Main {
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		frame.requestFocus();
 		
 		game.start();
 	}
