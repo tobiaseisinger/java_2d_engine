@@ -5,6 +5,8 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+import textures.ImageReader;
+
 public class Main {
 	public static void main(String[] args) {
 		Game game = new Game();
@@ -23,5 +25,6 @@ public class Main {
 		frame.requestFocus();
 		
 		game.start();
+		
 	}
 }
