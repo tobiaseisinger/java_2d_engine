@@ -12,7 +12,9 @@ public class ImageReader {
 		try {
 			BufferedImage image = ImageIO.read(new File(path));
 			System.out.println("Bild bei " + path + " konnte geladen werden!");
-			return image;
+			BufferedImage converted = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+			converted.getGraphics().drawImage(image, 0, 0, null);
+			return converted;
 		} catch(IOException e) {
 			System.err.println("Couldn't read from File at " + path);
 			return null;
