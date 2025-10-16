@@ -21,16 +21,19 @@ public class GameScreen implements Screen, KeyListener {
 	
 	public GameScreen() {
 		this.atlas = new Atlas(64,64,8,ImageReader.getPixelsOfImage(ImageReader.readImage("resources/Atlas8x8.png")));
-		Sprite[][] sprites = new Sprite[1][1];
-		sprites[0][0] = this.atlas.getSprite(0);
+		Sprite[][] sprites = new Sprite[2][2];
+        sprites[0][0] = this.atlas.getSprite(0);
+        sprites[1][0] = this.atlas.getSprite(0);
+        sprites[1][1] = this.atlas.getSprite(0);
+        sprites[0][1] = this.atlas.getSprite(0);
 		
-		GameObject test = new GameObject(20, 20, 1, 1, sprites);
+		GameObject test = new GameObject(20, 20, sprites);
 		
 		o.add(test);
 	}
-	
-	
-	
+
+
+
 	@Override
 	public void tick(int[] pixels) {
 		/**
@@ -45,6 +48,8 @@ public class GameScreen implements Screen, KeyListener {
 	        pixels[i] = (255 << 24) | (red << 16) | (green << 8) | blue;
 	    }
 		*/
+
+
 		for (int i = 0; i < pixels.length; i++) {
 		    pixels[i] = 0xFF000000;
 		}
@@ -54,7 +59,7 @@ public class GameScreen implements Screen, KeyListener {
 			obj.tick();
 			obj.render(pixels, 160);
 		}
-		
+
 		
 		tickCount++;
 	}

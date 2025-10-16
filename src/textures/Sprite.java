@@ -12,4 +12,8 @@ public class Sprite {
 	public int[] getPixels() {
 		return pixels;
 	}
+
+    public int getSize() {
+        return size;
+    }
 }
