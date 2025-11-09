@@ -2,8 +2,11 @@ package objects;
 
 import textures.Sprite;
 
-public class GameObject {
-	private int x,y;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+public class GameObject implements KeyListener {
+	public int x,y;
 	private Sprite[][] sprites;
 	
 	public GameObject(int x, int y, Sprite[][] sprites) {
@@ -44,5 +47,20 @@ public class GameObject {
                 screenPixels[screenIndex] = spritePixels[spriteIndex];
             }
         }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent keyEvent) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent keyEvent) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent keyEvent) {
+
     }
 }
